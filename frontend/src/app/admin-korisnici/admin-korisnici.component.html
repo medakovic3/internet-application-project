@@ -1,0 +1,147 @@
+<nav class="menu">
+    <ul>
+      <li *ngFor="let item of menuItems">
+        <a [routerLink]="item.link">{{ item.title }}</a>
+      </li>
+    </ul>
+</nav>
+<hr>
+<h1>Učesnici</h1>
+<table *ngIf="ucesnici.length>0; else porukaUcesnici">
+    <tr>
+        <th>Slika</th>
+        <th>Ime</th>
+        <th>Prezime</th>
+        <th>Korisnicko ime</th>
+        <th colspan="2">Akcije</th>
+    </tr>
+    <tr *ngFor="let i of indeksiUcesnici">
+
+        <td *ngIf="!azuriranjeUcesnici[i]">
+            <img src="../../assets/{{ucesnici[i].slika}}" height="100">
+        </td>
+        <td *ngIf="azuriranjeUcesnici[i]">
+            <input type="file" accept=".jpg, .png" name="slika" (change)='postaviSliku($event)'>
+        </td>
+
+        <td *ngIf="!azuriranjeUcesnici[i]">{{ucesnici[i].ime}}</td>
+        <td *ngIf="azuriranjeUcesnici[i]">
+            <input type="text" name="ime" [(ngModel)]="ucesnici[i].ime">
+        </td>
+
+        <td *ngIf="!azuriranjeUcesnici[i]">{{ucesnici[i].prezime}}</td>
+        <td *ngIf="azuriranjeUcesnici[i]">
+            <input type="text" name="prezime" [(ngModel)]="ucesnici[i].prezime">
+        </td>
+
+        <td *ngIf="!azuriranjeUcesnici[i]">{{ucesnici[i].kor_ime}}</td>
+        <td *ngIf="azuriranjeUcesnici[i]">
+            <input type="text" name="kor_ime" [(ngModel)]="ucesnici[i].kor_ime">
+        </td>
+
+        <td *ngIf="!azuriranjeUcesnici[i]">
+            <button (click)="azuriraj(i)">Ažuriraj</button>
+        </td>
+        <td *ngIf="azuriranjeUcesnici[i]">
+            <button (click)="potvrdi(ucesnici[i], i)">Potvrdi</button>
+        </td>
+
+        <td>
+            <button (click)="obrisi(ucesnici[i])">Obriši</button>
+        </td>
+    </tr>
+</table>
+<ng-template #porukaUcesnici>
+    Ne postoji nijedan učesnik u sistemu
+</ng-template>
+<h1>Organizatori</h1>
+<table *ngIf="organizatori.length>0; else porukaOrg">
+    <tr>
+        <th>Slika</th>
+        <th>Ime</th>
+        <th>Prezime</th>
+        <th>Korisnicko ime</th>
+        <th>Naziv organizacije</th>
+        <th>Maticni broj</th>
+        <th colspan="2">Akcije</th>
+    </tr>
+    <tr *ngFor="let i of indeksiOrganizatori">
+
+        <td *ngIf="!azuriranjeOrganizatori[i]">
+            <img src="../../assets/{{organizatori[i].slika}}" height="100">
+        </td>
+        <td *ngIf="azuriranjeOrganizatori[i]">
+            <input type="file" accept=".jpg, .png" name="slika" (change)='postaviSliku($event)'>
+        </td>
+
+        <td *ngIf="!azuriranjeOrganizatori[i]">{{organizatori[i].ime}}</td>
+        <td *ngIf="azuriranjeOrganizatori[i]">
+            <input type="text" name="ime" [(ngModel)]="organizatori[i].ime">
+        </td>
+
+        <td *ngIf="!azuriranjeOrganizatori[i]">{{organizatori[i].prezime}}</td>
+        <td *ngIf="azuriranjeOrganizatori[i]">
+            <input type="text" name="prezime" [(ngModel)]="organizatori[i].prezime">
+        </td>
+
+        <td *ngIf="!azuriranjeOrganizatori[i]">{{organizatori[i].kor_ime}}</td>
+        <td *ngIf="azuriranjeOrganizatori[i]">
+            <input type="text" name="kor_ime" [(ngModel)]="organizatori[i].kor_ime">
+        </td>
+
+        <td *ngIf="!azuriranjeOrganizatori[i]">{{organizatori[i].org_naziv}}</td>
+        <td *ngIf="azuriranjeOrganizatori[i]">
+            <input type="text" name="org_naziv" [(ngModel)]="organizatori[i].org_naziv">
+        </td>
+
+        <td *ngIf="!azuriranjeOrganizatori[i]">{{organizatori[i].org_maticni}}</td>
+        <td *ngIf="azuriranjeOrganizatori[i]">
+            <input type="text" name="prezime" [(ngModel)]="organizatori[i].org_maticni">
+        </td>
+
+        <td *ngIf="!azuriranjeOrganizatori[i]">
+            <button (click)="azurirajOrganizatori(i)">Ažuriraj</button>
+        </td>
+        <td *ngIf="azuriranjeOrganizatori[i]">
+            <button (click)="potvrdiOrg(organizatori[i], i)">Potvrdi</button>
+        </td>
+
+        <td>
+            <button (click)="obrisi(organizatori[i])">Obriši</button>
+        </td>
+    </tr>
+</table>
+<ng-template #porukaOrg>
+    Ne postoji nijedan organizator u sistemu
+</ng-template>
+<h1>Zahtevi za registraciju</h1>
+<table *ngIf="zahtevi.length>0; else porukaZahtevi">
+    <tr>
+        <th>Slika</th>
+        <th>Ime</th>
+        <th>Prezime</th>
+        <th>Korisnicko ime</th>
+        <th>Tip</th>
+        <th colspan="2">Akcije</th>
+    </tr>
+    <tr *ngFor="let k of zahtevi">
+
+        <td>
+            <img src="../../assets/{{k.slika}}" height="100">
+        </td>
+        <td>{{k.ime}}</td>
+        <td>{{k.prezime}}</td>
+        <td>{{k.kor_ime}}</td>
+        <td *ngIf="k.tip == 0">Učesnik</td>
+        <td *ngIf="k.tip == 1">Organizator</td>
+        <td>
+            <button (click)="obradiZahtev(k.kor_ime, 1)">Prihvati</button>
+        </td>
+        <td>
+            <button (click)="obradiZahtev(k.kor_ime, -1)">Odbij</button>
+        </td>
+    </tr>
+</table>
+<ng-template #porukaZahtevi>
+    Nema zahteva za registraciju
+</ng-template>

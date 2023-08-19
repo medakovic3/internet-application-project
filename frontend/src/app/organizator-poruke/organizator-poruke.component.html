@@ -1,0 +1,42 @@
+<nav class="menu">
+    <ul>
+      <li *ngFor="let item of menuItems">
+        <a [routerLink]="item.link">{{ item.title }}</a>
+      </li>
+    </ul>
+</nav>
+<hr>
+<h1>{{radionica.naziv}}</h1>
+<img src="../../assets/{{radionica.slika}}" height="200">
+<h2>Poruke</h2>
+<div *ngIf="caskanja.length > 0; else poruka">
+  <table>
+    <tr>
+      <td>Izaberite učesnika:</td>
+      <td>
+        <select [(ngModel)]="kor_ime_uces">
+          <option *ngFor="let caskanje of caskanja" value="{{caskanje.kor_ime_uces}}">{{caskanje.kor_ime_uces}}</option>
+        </select>
+      </td>
+    </tr>
+  </table>
+  <br>
+  <div *ngFor="let caskanje of caskanja">
+    <div *ngIf="caskanje.kor_ime_uces == kor_ime_uces">
+        <table>
+            <tr *ngFor="let poruka of caskanje.poruke">
+                <td>{{poruka.kor_ime}}:</td>
+                <td>{{poruka.tekst}}</td>
+                <td>{{poruka.vreme_poruke | date: 'yyyy.MM.dd HH:mm'}}</td>
+            </tr>
+        </table>
+    </div>
+  </div>
+  <div *ngIf="kor_ime_uces != ''">
+    <input type="text" name="tekstPoruke" [(ngModel)]="tekstPoruke" style="width: 1300px;">
+    <button (click)="upisiPoruku()">Pošalji poruku</button>
+  </div>
+</div>
+<ng-template #poruka>
+  Nemate nijednu poruku
+</ng-template>

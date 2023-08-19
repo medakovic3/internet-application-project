@@ -1,0 +1,96 @@
+<nav class="menu">
+    <ul>
+      <li *ngFor="let item of menuItems">
+        <a [routerLink]="item.link">{{ item.title }}</a>
+      </li>
+    </ul>
+</nav>
+<hr>
+<h1>Korisnički profil</h1>
+<img src="../../assets/{{korisnik.slika}}" height="200">
+<table>
+    <tr>
+        <td>Korisničko ime:</td>
+        <td>{{korisnik.kor_ime}}</td>
+    </tr>
+    <tr>
+        <td>Ime:</td>
+        <td>{{korisnik.ime}}</td>
+    </tr>
+    <tr>
+        <td>Prezime:</td>
+        <td>{{korisnik.prezime}}</td>
+    </tr>
+    <tr>
+        <td>Telefon:</td>
+        <td>{{korisnik.telefon}}</td>
+    </tr>
+    <tr>
+        <td>Mejl:</td>
+        <td>{{korisnik.mejl}}</td>
+    </tr>
+    <tr>
+        <td>Tip:</td>
+        <td *ngIf="korisnik.tip == 0">Učesnik</td>
+        <td *ngIf="korisnik.tip == 1">Organizator</td>
+        <td *ngIf="korisnik.tip == 2">Admin</td>
+    </tr>
+</table>
+<hr>
+<h1>Moja ćaskanja</h1>
+<div *ngIf="mojaCaskanja.length>0; else porukaCaskanja">
+    Izaberite radionicu:    <select [(ngModel)]="id_rad">
+                                <option *ngFor="let caskanje of mojaCaskanja" value="{{caskanje.id_rad}}">{{caskanje.naziv_rad}}</option>
+                            </select>
+    <br>
+    <div *ngFor="let caskanje of mojaCaskanja">
+        <div *ngIf="caskanje.id_rad == id_rad">
+            <table>
+                <tr *ngFor="let poruka of caskanje.poruke">
+                    <td>{{poruka.kor_ime}}:</td>
+                    <td>{{poruka.tekst}}</td>
+                    <td>{{poruka.vreme_poruke | date: 'yyyy.MM.dd HH:mm'}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<ng-template #porukaCaskanja>
+    Nemate nijedno ćaskanje.
+</ng-template>
+<hr>
+<h1>Posećene radionice</h1>
+<div *ngIf="poseceneRadionice.length>0; else porukaRadionice">
+<table>
+    <tr>
+        <th>Naziv</th>
+        <th>Mesto</th>
+        <th>Datum i vreme</th>
+        <th>Slika</th>
+    </tr>
+    <tr>
+        <td style="text-align: center;">
+            <button (click)="sortirajPoNazivu()">Soritraj</button>
+        </td>
+        <td style="text-align: center;">
+            <button (click)="sortirajPoMestu()">Soritraj</button>
+        </td>
+        <td style="text-align: center;">
+            <button (click)="sortirajPoDatumu()">Soritraj</button>
+        </td>
+    </tr>
+    <tr *ngFor="let r of poseceneRadionice">
+        <td style="text-align: center;">{{r.naziv}}</td>
+        <td style="text-align: center;">{{r.mesto}}</td>
+        <td style="text-align: center;">{{r.datum | date: 'yyyy.MM.dd HH:mm'}}</td>
+        <td>
+            <img src="../../assets/{{r.slika}}" height="100">
+        </td>
+    </tr>
+</table>
+</div>
+<ng-template #porukaRadionice>
+    Niste posetili nijednu radionicu.
+</ng-template>
+
+

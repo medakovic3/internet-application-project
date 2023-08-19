@@ -1,0 +1,84 @@
+<nav class="menu">
+    <ul>
+      <li *ngFor="let item of menuItems">
+        <a [routerLink]="item.link">{{ item.title }}</a>
+      </li>
+    </ul>
+</nav>
+<hr>
+<h1>Aktuelne radionice</h1>
+<table *ngIf="radionice.length>0; else poruka">
+    <tr>
+        <th>Slika</th>
+        <th>Naziv</th>
+        <th>Mesto</th>
+        <th>Datum i vreme</th>
+        <th colspan="2">Akcije</th>
+    </tr>
+    <tr *ngFor="let i of indeksi">
+
+        <td *ngIf="!azuriranje[i]">
+            <img src="../../assets/{{radionice[i].slika}}" height="100">
+        </td>
+        <td *ngIf="azuriranje[i]">
+            <input type="file" accept=".jpg, .png" name="slika" (change)='postaviSliku($event)'>
+        </td>
+
+        <td *ngIf="!azuriranje[i]">{{radionice[i].naziv}}</td>
+        <td *ngIf="azuriranje[i]">
+            <input type="text" name="naziv" [(ngModel)]="radionice[i].naziv">
+        </td>
+
+        <td *ngIf="!azuriranje[i]">{{radionice[i].mesto}}</td>
+        <td *ngIf="azuriranje[i]">
+            <input type="text" name="mesto" [(ngModel)]="radionice[i].mesto">
+        </td>
+
+        <td *ngIf="!azuriranje[i]">{{radionice[i].datum | date: 'yyyy.MM.dd HH:mm'}}</td>
+        <td *ngIf="azuriranje[i]">
+            <input type="datetime" name="datum" [(ngModel)]="radionice[i].datum">
+        </td>
+
+        <td *ngIf="!azuriranje[i]">
+            <button (click)="azuriraj(i)">Ažuriraj</button>
+        </td>
+        <td *ngIf="azuriranje[i]">
+            <button (click)="potvrdi(radionice[i], i)">Potvrdi</button>
+        </td>
+
+        <td>
+            <button (click)="obrisi(radionice[i])">Obriši</button>
+        </td>
+    </tr>
+</table>
+<ng-template #poruka>
+    Ne postoji nijedna aktuelna radionica
+</ng-template>
+<h1>Zahtevi za kreiranje radionice</h1>
+<table *ngIf="zahtevi.length>0; else porukaZahtevi">
+    <tr>
+        <th>Slika</th>
+        <th>Naziv</th>
+        <th>Mesto</th>
+        <th>Datum i vreme</th>
+        <th colspan="2">Akcije</th>
+    </tr>
+    <tr *ngFor="let r of zahtevi">
+
+        <td>
+            <img src="../../assets/{{r.slika}}" height="100">
+        </td>
+        <td>{{r.naziv}}</td>
+        <td>{{r.mesto}}</td>
+        <td>{{r.datum | date: 'yyyy.MM.dd HH:mm'}}</td>
+        <td>
+            <button (click)="obradiZahtev(r.id, 1)">Prihvati</button>
+        </td>
+        <td>
+            <button (click)="obradiZahtev(r.id, -1)">Odbij</button>
+        </td>
+    </tr>
+</table>
+<ng-template #porukaZahtevi>
+    Nema zahteva za kreiranje radionice
+</ng-template>

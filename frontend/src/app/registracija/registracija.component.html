@@ -1,0 +1,88 @@
+<nav class="menu">
+    <ul>
+      <li *ngFor="let item of menuItems">
+        <a [routerLink]="item.link">{{ item.title }}</a>
+      </li>
+    </ul>
+</nav>
+<hr>
+<table>
+  <tr>
+      <td>Korisnicko ime:</td>
+      <td>
+          <input type="text" name="kor_ime" [(ngModel)]="kor_ime" required>
+      </td>
+  </tr>
+  <tr>
+      <td>Lozinka:</td>
+      <td>
+          <input type="password" name="lozinka1" [(ngModel)]="lozinka1" required>
+      </td>
+  </tr>
+  <tr>
+      <td>Potvrdite lozinku:</td>
+      <td>
+          <input type="password" name="lozinka2" [(ngModel)]="lozinka2" required>
+      </td>
+  </tr>
+  <tr>
+      <td>Ime:</td>
+      <td>
+          <input type="text" name="ime" [(ngModel)]="ime" required>
+      </td>
+  </tr>  
+  <tr>
+      <td>Prezime:</td>
+      <td>
+          <input type="text" name="prezime" [(ngModel)]="prezime" required>
+      </td>
+  </tr>
+  <tr>
+      <td>Telefon:</td>
+      <td>
+          <input type="text" name="telefon" [(ngModel)]="telefon" required>
+      </td>
+  </tr>
+  <tr>
+      <td>Mejl:</td>
+      <td>
+          <input type="email" name="mejl" [(ngModel)]="mejl" required>
+      </td>
+  </tr>
+  <tr>
+    <td>Ja sam organizator:</td>
+    <td>
+      <input type="checkbox" name="tip" [(ngModel)]="tip">
+    </td>
+  </tr>
+  <tr *ngIf="tip">
+    <td>Naziv organizacije:</td>
+    <td>
+      <input type="text" name="org_naziv" [(ngModel)]="org_naziv">
+    </td>
+  </tr>
+  <tr *ngIf="tip">
+    <td>Adresa organizacije:</td>
+    <td>
+      <input type="text" name="org_adresa" [(ngModel)]="org_adresa">
+    </td>
+  </tr>
+  <tr *ngIf="tip">
+    <td>Maticni broj organizacije:</td>
+    <td>
+      <input type="text" name="org_maticni" [(ngModel)]="org_maticni">
+    </td>
+  </tr>
+  <tr>
+      <td>Slika:</td>
+      <td>
+          <input type="file" accept=".jpg, .png" name="slika" (change)='postaviSliku($event)'>
+      </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+        <button (click)="registracija()">Registracija</button>
+    </td>
+  </tr>
+</table>
+{{poruka}}

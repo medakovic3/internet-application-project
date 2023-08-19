@@ -1,0 +1,27 @@
+<table>
+    <tr>
+        <td>Unesite korisničko ime:</td>
+        <td>
+            <input type="text" name="kor_ime" [(ngModel)]="kor_ime">
+        </td>
+    </tr>
+    <tr>
+        <td>Unesite staru lozinku:</td>
+        <td>
+            <input type="password" name="lozinka" [(ngModel)]="lozinka">
+        </td>
+    </tr>
+    <tr>
+        <td>Izaberite novu lozinku:</td>
+        <td>
+            <input type="password" name="nova_lozinka" [(ngModel)]="nova_lozinka">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <button (click)="promenaLozinke()">Promeni lozinku</button>
+        </td>
+    </tr>
+</table>
+<button (click)="povratak()">Povratak na prethodnu stranicu</button>
+{{poruka}}

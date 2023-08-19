@@ -1,0 +1,37 @@
+<nav class="menu">
+    <ul>
+      <li *ngFor="let item of menuItems">
+        <a [routerLink]="item.link">{{ item.title }}</a>
+      </li>
+    </ul>
+</nav>
+<hr>
+<h1>{{radionica.naziv}}</h1>
+<img src="../../assets/{{radionica.slika}}" height="300">
+<h2>{{radionica.mesto}}</h2>
+<h3>{{radionica.datum | date: 'yyyy.MM.dd HH:mm'}}</h3>
+<h4>{{radionica.dug_opis}}</h4>
+<button (click)="dodajPrijavu()">Prijavi me</button>
+{{poruka}}
+<hr>
+<h2>Galerija:</h2>
+<div *ngFor="let slika of radionica.galerija">
+  <img src="../../assets/{{slika}}" height="200">
+  <br>
+</div>
+<hr>
+<h2>Pričajte sa organizatorom</h2>
+<br><br>
+<div *ngIf="caskanje">
+  <table>
+    <tr *ngFor="let poruka of caskanje.poruke">
+        <td>{{poruka.kor_ime}}:</td>
+        <td>{{poruka.tekst}}</td>
+        <td>
+          {{poruka.vreme_poruke | date: 'yyyy.MM.dd HH:mm'}}
+        </td>
+    </tr>
+</table>
+</div>
+<input type="text" style="width: 1000px;" name="tekstPoruke" [(ngModel)]="tekstPoruke">
+<button (click)="upisiPoruku()">Pošalji poruku</button>

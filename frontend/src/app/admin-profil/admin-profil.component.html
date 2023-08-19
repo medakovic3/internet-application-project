@@ -1,0 +1,39 @@
+<nav class="menu">
+    <ul>
+      <li *ngFor="let item of menuItems">
+        <a [routerLink]="item.link">{{ item.title }}</a>
+      </li>
+    </ul>
+</nav>
+<hr>
+<h1>Korisnički profil</h1>
+<img src="../../assets/{{korisnik.slika}}" height="200">
+<table>
+    <tr>
+        <td>Korisničko ime:</td>
+        <td>{{korisnik.kor_ime}}</td>
+    </tr>
+    <tr>
+        <td>Ime:</td>
+        <td>{{korisnik.ime}}</td>
+    </tr>
+    <tr>
+        <td>Prezime:</td>
+        <td>{{korisnik.prezime}}</td>
+    </tr>
+    <tr>
+        <td>Telefon:</td>
+        <td>{{korisnik.telefon}}</td>
+    </tr>
+    <tr>
+        <td>Mejl:</td>
+        <td>{{korisnik.mejl}}</td>
+    </tr>
+    <tr>
+        <td>Tip:</td>
+        <td *ngIf="korisnik.tip == 0">Učesnik</td>
+        <td *ngIf="korisnik.tip == 1">Organizator</td>
+        <td *ngIf="korisnik.tip == 2">Admin</td>
+    </tr>
+</table>
+<hr>

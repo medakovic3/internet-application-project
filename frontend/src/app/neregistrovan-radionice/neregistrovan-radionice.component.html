@@ -1,0 +1,50 @@
+<nav class="menu">
+    <ul>
+      <li *ngFor="let item of menuItems">
+        <a [routerLink]="item.link">{{ item.title }}</a>
+      </li>
+    </ul>
+</nav>
+<hr>
+<h2>Aktuelne radionice</h2>
+<table>
+  <tr>
+    <td>Pretraži po nazivu:</td>
+    <td>
+      <input type="text" name="pretragaNaziv" [(ngModel)]="pretragaNaziv">
+    </td>
+    <td>
+      <button (click)="pretraziPoNazivu()">Pretraži</button>
+    </td>
+  </tr>
+  <tr>
+    <td>Pretraži po mestu:</td>
+    <td>
+      <input type="text" name="pretragaMesto" [(ngModel)]="pretragaMesto">
+    </td>
+    <td>
+      <button (click)="pretraziPoMestu()">Pretraži</button>
+    </td>
+  </tr>
+</table>
+<table>
+  <tr>
+    <td>Sortiraj po nazivu:</td>
+    <td>
+      <button (click)="sortirajPoNazivu()">Sortiraj</button>
+    </td>
+  </tr>
+  <tr>
+    <td>Sortiraj po datumu:</td>
+    <td>
+      <button (click)="sortirajPoDatumu()">Sortiraj</button>
+    </td>
+  </tr>
+</table>
+<div *ngFor="let r of aktuelneRadionice">
+  <h4>{{r.naziv}}</h4>
+  <img src="../../assets/{{r.slika}}" height="300"> <br>
+  Datum i vreme odrzavanja: {{r.datum | date: 'yyyy.MM.dd HH:mm'}} <br>
+  Mesto odrzavanja: {{r.mesto}} <br>
+  Kratak opis radionice: {{r.kratak_opis}} <br>
+</div>

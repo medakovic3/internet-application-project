@@ -1,0 +1,59 @@
+<nav class="menu">
+    <ul>
+      <li *ngFor="let item of menuItems">
+        <a [routerLink]="item.link">{{ item.title }}</a>
+      </li>
+    </ul>
+</nav>
+<hr>
+<h1>Uredi radionicu</h1>
+<table>
+    <tr>
+        <td>Naziv:</td>
+        <td>
+            <input type="text" name="naziv" [(ngModel)]="radionica.naziv">
+        </td>
+    </tr>
+    <tr>
+        <td>Mesto:</td>
+        <td>
+            <input type="text" name="mesto" [(ngModel)]="radionica.mesto">
+        </td>
+    </tr>
+    <tr>
+        <td>Datum i vreme:</td>
+        <td>
+            <input type="datetime" name="datum" [(ngModel)]="radionica.datum">
+        </td>
+    </tr>
+    <tr>
+        <td>Kratak opis:</td>
+        <td>
+            <input type="text" name="kratak_opis" [(ngModel)]="radionica.kratak_opis" style="width: 500px;">
+        </td>
+    </tr>
+    <tr>
+        <td>Dug opis:</td>
+        <td>
+            <input type="text" name="dug_opis" [(ngModel)]="radionica.dug_opis" style="width: 1000px;">
+        </td>
+    </tr>
+    <tr>
+        <td>Slika:</td>
+        <td>
+            <img src="../../assets/{{radionica.slika}}" height="100">
+        </td>
+    </tr>
+    <tr>
+        <td>Promeni sliku:</td>
+        <td>
+           <input type="file" accept=".jpg, .png" name="slika" (change)='postaviSliku($event)'>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <button (click)="uredi()">Uredi</button>
+        </td>
+    </tr>
+</table>
+

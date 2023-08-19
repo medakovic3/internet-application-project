@@ -1,0 +1,55 @@
+<nav class="menu">
+    <ul>
+      <li *ngFor="let item of menuItems">
+        <a [routerLink]="item.link">{{ item.title }}</a>
+      </li>
+    </ul>
+</nav>
+<hr>
+<h1>Prijavljene radionice</h1>
+<div *ngIf="prijavljeneRadionice.length>0; else porukaRadionice">
+<table>
+    <tr>
+        <th>Naziv</th>
+        <th>Mesto</th>
+        <th>Datum i vreme</th>
+        <th>Slika</th>
+    </tr>
+    <tr *ngFor="let r of prijavljeneRadionice">
+        <td style="text-align: center;">{{r.naziv}}</td>
+        <td style="text-align: center;">{{r.mesto}}</td>
+        <td style="text-align: center;">{{r.datum | date: 'yyyy.MM.dd HH:mm'}}</td>
+        <td>
+            <img src="../../assets/{{r.slika}}" height="100">
+        </td>
+    </tr>
+</table>
+</div>
+<ng-template #porukaRadionice>
+    Niste prijavili nijednu radionicu.
+</ng-template>
+<h1>Sve aktuelne radionice</h1>
+<div *ngIf="aktuelneRadionice.length>0; else porukaRadionice2">
+    <table>
+        <tr>
+            <th>Naziv</th>
+            <th>Mesto</th>
+            <th>Datum i vreme</th>
+            <th>Slika</th>
+        </tr>
+        <tr *ngFor="let r of aktuelneRadionice">
+            <td style="text-align: center;">{{r.naziv}}</td>
+            <td style="text-align: center;">{{r.mesto}}</td>
+            <td style="text-align: center;">{{r.datum | date: 'yyyy.MM.dd HH:mm'}}</td>
+            <td style="text-align: center;">
+                <img src="../../assets/{{r.slika}}" height="100">
+            </td>
+            <td style="text-align: center;">
+                <button (click)="detalji(r.id)">Detalji</button>
+            </td>
+        </tr>
+    </table>
+</div>
+<ng-template #porukaRadionice2>
+    Trenutno nema aktuelnih radionica.
+</ng-template>

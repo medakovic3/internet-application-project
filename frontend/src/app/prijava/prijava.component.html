@@ -1,0 +1,29 @@
+<nav class="menu">
+    <ul>
+      <li *ngFor="let item of menuItems">
+        <a [routerLink]="item.link">{{ item.title }}</a>
+      </li>
+    </ul>
+</nav>
+<hr>
+<table>
+  <tr>
+      <td>Korisnicko ime:</td>
+      <td>
+          <input type="text" name="kor_ime" [(ngModel)]="kor_ime">
+      </td>
+  </tr>
+  <tr>
+      <td>Lozinka:</td>
+      <td>
+          <input type="password" name="lozinka" [(ngModel)]="lozinka">
+      </td>
+  </tr>
+  <tr>
+      <td colspan="2">
+          <button (click)="prijava()">Prijava</button>
+      </td>
+  </tr>
+</table>
+{{poruka}}
+
